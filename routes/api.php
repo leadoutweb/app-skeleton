@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\V1\Authentication\ActivityController;
 use App\Http\Controllers\V1\Authentication\PasswordController;
 use App\Http\Controllers\V1\Authentication\PasswordResetController;
 use App\Http\Controllers\V1\Authentication\PasswordResetLinkController;
@@ -29,6 +30,8 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
     Route::post('users/{user}/activations', [UserActivationController::class, 'store']);
 
     Route::group(['middleware' => 'auth'], function () {
+        Route::get('activity', [ActivityController::class, 'index']);
+
         Route::put('password', [PasswordController::class, 'update']);
 
         Route::controller(ProfileController::class)->group(function () {

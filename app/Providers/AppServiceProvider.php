@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Authentication\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 
@@ -38,9 +40,13 @@ class AppServiceProvider extends ServiceProvider
                 ->toString();
         });
 
-        Builder::macro('apiPaginate', fn () => $this->paginate(
+        Builder::macro('apiPaginate', fn() => $this->paginate(
             perPage: request()->collect('page')->get('size'),
             page: request()->collect('page')->get('number')
         ));
+
+        Relation::enforceMorphMap([
+            'users' => User::class
+        ]);
     }
 }

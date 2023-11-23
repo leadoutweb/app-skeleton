@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Helpers\Verbs\Eloquent;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Testing\TestResponse;
 use Tests\Feature\Helpers\TestsValidation;
 
@@ -13,7 +14,7 @@ trait TestsCreate
     public function can_create_a_resource()
     {
         $response = $this->usesAuthentication() ? $this->valid()->request() : $this->request();
-
+dd(DB::table('activity_log')->get());
         $this->assertCreated($response);
     }
 

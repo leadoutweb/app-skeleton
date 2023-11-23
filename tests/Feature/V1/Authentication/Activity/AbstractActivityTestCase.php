@@ -1,15 +1,15 @@
 <?php
 
-namespace Tests\Feature\V1\Authentication\Users;
+namespace Tests\Feature\V1\Authentication\Activity;
 
-use App\Authentication\Models\User;
+use Database\Factories\Authentication\ActivityFactory;
 use Illuminate\Database\Eloquent\Model;
 use Tests\Feature\FeatureTestCase;
 
-abstract class AbstractUserTestCase extends FeatureTestCase
+abstract class AbstractActivityTestCase extends FeatureTestCase
 {
     /**
-     * Get the structure for a user.
+     * Get the structure for an activity.
      */
     protected function getStructure(): array
     {
@@ -18,11 +18,6 @@ abstract class AbstractUserTestCase extends FeatureTestCase
             'type',
 
             'attributes' => [
-                'email',
-                'name',
-
-                'created_at',
-                'updated_at',
             ],
         ];
     }
@@ -32,7 +27,7 @@ abstract class AbstractUserTestCase extends FeatureTestCase
      */
     protected function getResource(): Model
     {
-        return User::factory()->create();
+        return ActivityFactory::new()->create();
     }
 
     /**
@@ -40,6 +35,6 @@ abstract class AbstractUserTestCase extends FeatureTestCase
      */
     protected function getBaseUrl(): string
     {
-        return '/api/v1/users';
+        return '/api/v1/activity';
     }
 }
