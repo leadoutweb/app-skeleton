@@ -40,13 +40,13 @@ class AppServiceProvider extends ServiceProvider
                 ->toString();
         });
 
-        Builder::macro('apiPaginate', fn() => $this->paginate(
+        Builder::macro('apiPaginate', fn () => $this->paginate(
             perPage: request()->collect('page')->get('size'),
             page: request()->collect('page')->get('number')
         ));
 
         Relation::enforceMorphMap([
-            'users' => User::class
+            'users' => User::class,
         ]);
     }
 }

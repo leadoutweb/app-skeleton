@@ -11,7 +11,7 @@ use Spatie\Activitylog\Models\Activity;
 class ActivityFactory extends Factory
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected $model = Activity::class;
 
