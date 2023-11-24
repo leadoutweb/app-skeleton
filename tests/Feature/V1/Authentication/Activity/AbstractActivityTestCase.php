@@ -18,6 +18,19 @@ abstract class AbstractActivityTestCase extends FeatureTestCase
             'type',
 
             'attributes' => [
+                'description',
+                'event',
+                'properties',
+                'subject_name',
+                'causer_name',
+
+                'subject_id',
+                'subject_type',
+                'causer_id',
+                'causer_type',
+
+                'created_at',
+                'updated_at',
             ],
         ];
     }

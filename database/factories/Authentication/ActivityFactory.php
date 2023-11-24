@@ -2,6 +2,7 @@
 
 namespace Database\Factories\Authentication;
 
+use App\Authentication\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Spatie\Activitylog\Models\Activity;
 
@@ -24,6 +25,13 @@ class ActivityFactory extends Factory
     {
         return [
             'description' => 'created',
+            'event' => 'created',
+            'properties' => ['name' => 'Henrik', 'email' => 'henrik@example.com'],
+
+            'subject_id' => User::factory(),
+            'subject_type' => 'users',
+            'causer_id' => User::factory(),
+            'causer_type' => 'users',
         ];
     }
 }
