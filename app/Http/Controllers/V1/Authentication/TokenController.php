@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\V1\Authentication;
 
+use App\Authentication\Exceptions\InvalidCredentialsException;
 use App\Http\Requests\Authentication\Tokens\StoreTokenRequest;
 use App\Http\Resources\Authentication\TokenResource;
 use Illuminate\Http\Response;
@@ -13,7 +14,11 @@ class TokenController
      */
     public function store(StoreTokenRequest $request): TokenResource
     {
-        return TokenResource::make(auth()->guard()->attempt($request->validated()));
+        if ($token = auth()->guard()->attempt($request->validated())) {
+            return TokenResource::make($token);
+        }
+
+        throw new InvalidCredentialsException;
     }
 
     /**

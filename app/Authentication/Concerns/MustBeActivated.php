@@ -18,7 +18,7 @@ trait MustBeActivated
     {
         $this->activation_token = $token = hash_hmac('sha256', Str::random(40), config('app.key'));
 
-        $this->save();
+        $this->saveQuietly();
 
         return $token;
     }
@@ -36,7 +36,9 @@ trait MustBeActivated
 
         $this->activated_at = Carbon::now();
 
-        $this->save();
+        $this->saveQuietly();
+
+        activity()->performedOn($this)->event('activated')->log('activated');
     }
 
     /**

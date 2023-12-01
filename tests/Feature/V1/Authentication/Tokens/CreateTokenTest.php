@@ -32,6 +32,14 @@ class CreateTokenTest extends AbstractTokenTestCase
         );
     }
 
+    /** @test */
+    public function can_not_create_a_token_with_invalid_credentials()
+    {
+        $response = $this->valid()->request(['password' => 'not-hidden']);
+
+        $this->assertDomainException($response, 'INVALID_CREDENTIALS');
+    }
+
     /**
      * {@inheritdoc}
      */
